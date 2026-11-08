@@ -2,25 +2,7 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import {
-<<<<<<< HEAD
-  AlertTriangle,
-  BedDouble,
-  Bus,
-  Car,
-  CloudRain,
-  MapPin,
-  Phone,
-  Search,
-  ShieldCheck,
-  Star,
-  Train,
-  Utensils,
-  WifiOff,
-  Hotel,
-  UserRound,
-=======
   AlertTriangle, BedDouble, Bus, Car, CloudRain, MapPin, Phone, Search, ShieldCheck, Star, Train, Utensils, WifiOff, Hotel, UserRound, User, Clock3, Navigation, Share2, UserPlus, Check, MapPinned,
->>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -170,12 +152,6 @@ export function GuardianShield() {
   const [active, setActive] = useState(true);
   const [interval, setIntervalMins] = useState(30);
   const [phoneOff, setPhoneOff] = useState(false);
-<<<<<<< HEAD
-  const [log, setLog] = useState<string[]>([
-    "10:00 — Checked in at Chandigarh bus stand",
-    "10:30 — On bus, near Pinjore",
-  ]);
-=======
   const [log, setLog] = useState<string[]>(["10:00 — Checked in at Chandigarh bus stand", "10:30 — On bus, near Pinjore"]);
   const [username, setUsername] = useState("");
   const [connectedUser, setConnectedUser] = useState("Mom");
@@ -183,7 +159,6 @@ export function GuardianShield() {
   const [shareHotel, setShareHotel] = useState(false);
   const [rideBooked, setRideBooked] = useState(false);
   const [shareCab, setShareCab] = useState(false);
->>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
 
   // Demo: add a check-in every 8s while active and phone is on
   useEffect(() => {
@@ -224,17 +199,6 @@ export function GuardianShield() {
   };
 
   return (
-<<<<<<< HEAD
-    <section id="guardian" className="px-4 py-16">
-      <div className="mx-auto max-w-6xl">
-        <SectionTitle
-          eyebrow="Guardian Shield"
-          title="Peace of mind for parents"
-          sub="Automatic check-ins for kids and solo travelers, with a fail-safe if their phone goes quiet."
-        />
-        <div className="grid gap-5 md:grid-cols-2">
-          <div className={card}>
-=======
     <section id="guardian" className="bg-[#f0fbfc] px-4 py-16 md:py-20">
       <div className="mx-auto max-w-[1440px]">
         <div className="mx-auto mb-10 max-w-4xl text-center">
@@ -279,7 +243,6 @@ export function GuardianShield() {
         ) : (
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-[2rem] border border-[#d1e9ed] bg-white p-6 shadow-soft md:p-8">
->>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
             <div className="flex items-center justify-between">
               <h3 className="flex items-center gap-2 text-xl font-semibold">
                 <ShieldCheck className="text-safe" />
@@ -291,29 +254,11 @@ export function GuardianShield() {
             </div>
             <div className="mt-4 flex gap-2">
               {[30, 45, 60].map((m) => (
-<<<<<<< HEAD
-                <button
-                  key={m}
-                  onClick={() => setIntervalMins(m)}
-                  className={`rounded-full px-4 py-2 text-sm font-semibold ${interval === m ? "bg-primary text-primary-foreground" : "bg-muted"}`}
-                >
-                  Every {m} min
-                </button>
-              ))}
-            </div>
-            <ul className="mt-5 space-y-2">
-              {log.map((l, i) => (
-                <li key={i} className="rounded-2xl bg-mint/60 px-4 py-2 text-sm">
-                  {l}
-                </li>
-              ))}
-=======
                 <button key={m} onClick={() => setIntervalMins(m)} aria-pressed={interval === m} className={`flex-1 rounded-full px-3 py-3 text-sm font-bold transition md:py-4 md:text-base ${interval === m ? "bg-primary text-primary-foreground shadow-sm" : "bg-[#e8f5f8] hover:bg-[#dceff3]"}`}>Every {m} min</button>
               ))}
             </div>
             <ul className="mt-6 space-y-3">
               {log.map((l, i) => <li key={i} className="rounded-full bg-[#d8f8ee] px-5 py-3 text-sm font-semibold md:px-6 md:py-4 md:text-base">{l}</li>)}
->>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
             </ul>
             <label className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
               <Switch checked={phoneOff} onCheckedChange={setPhoneOff} />
@@ -329,29 +274,10 @@ export function GuardianShield() {
             </p>
             <ul className="mt-4 space-y-3">
               {failSafe.map((f) => (
-<<<<<<< HEAD
-                <li
-                  key={f.label}
-                  className={`flex items-center justify-between rounded-2xl p-4 ${phoneOff ? "bg-peach" : "bg-muted opacity-60"}`}
-                >
-                  <div className="flex items-center gap-3">
-                    <f.icon className="text-primary" />
-                    <div>
-                      <p className="font-semibold">{f.label}</p>
-                      <p className="text-xs text-muted-foreground">{f.who}</p>
-                    </div>
-                  </div>
-                  <Button asChild size="sm" disabled={!phoneOff} className="rounded-full">
-                    <a href={phoneOff ? `tel:${f.phone.replace(/\s/g, "")}` : undefined}>
-                      <Phone className="mr-1 h-3 w-3" />
-                      Call
-                    </a>
-=======
                 <li key={f.label} className={`flex items-center justify-between gap-3 rounded-[1.5rem] p-4 md:p-5 ${phoneOff ? "bg-peach" : "bg-[#f0f8fb]"}`}>
                   <div className="flex min-w-0 items-center gap-3 md:gap-5"><f.icon className="h-6 w-6 shrink-0 text-safe" /><div className="min-w-0"><p className="font-bold md:text-lg">{f.label}</p><p className="truncate text-sm text-muted-foreground md:text-base">{f.who}</p></div></div>
                   <Button asChild size="sm" disabled={!phoneOff} className="shrink-0 rounded-full bg-safe px-4 text-white hover:bg-safe/90">
                     <a href={phoneOff ? `tel:${f.phone.replace(/\s/g, "")}` : undefined}><Phone className="mr-1 h-3 w-3" />Call</a>
->>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
                   </Button>
                 </li>
               ))}
