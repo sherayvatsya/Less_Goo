@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import {
+<<<<<<< HEAD
   AlertTriangle,
   BedDouble,
   Bus,
@@ -17,6 +18,9 @@ import {
   WifiOff,
   Hotel,
   UserRound,
+=======
+  AlertTriangle, BedDouble, Bus, Car, CloudRain, MapPin, Phone, Search, ShieldCheck, Star, Train, Utensils, WifiOff, Hotel, UserRound, User, Clock3, Navigation, Share2, UserPlus, Check, MapPinned,
+>>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -162,13 +166,24 @@ export function Hero() {
 
 /* 3. Guardian Shield */
 export function GuardianShield() {
+  const [role, setRole] = useState<"user" | "guardian">("guardian");
   const [active, setActive] = useState(true);
   const [interval, setIntervalMins] = useState(30);
   const [phoneOff, setPhoneOff] = useState(false);
+<<<<<<< HEAD
   const [log, setLog] = useState<string[]>([
     "10:00 — Checked in at Chandigarh bus stand",
     "10:30 — On bus, near Pinjore",
   ]);
+=======
+  const [log, setLog] = useState<string[]>(["10:00 — Checked in at Chandigarh bus stand", "10:30 — On bus, near Pinjore"]);
+  const [username, setUsername] = useState("");
+  const [connectedUser, setConnectedUser] = useState("Mom");
+  const [shareLocation, setShareLocation] = useState(true);
+  const [shareHotel, setShareHotel] = useState(false);
+  const [rideBooked, setRideBooked] = useState(false);
+  const [shareCab, setShareCab] = useState(false);
+>>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
 
   // Demo: add a check-in every 8s while active and phone is on
   useEffect(() => {
@@ -196,7 +211,20 @@ export function GuardianShield() {
     { icon: UserRound, label: "Emergency contact", who: "Aunt Priya", phone: "+91 98720 00000" },
   ];
 
+  const connectGuardian = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const nextUsername = username.trim().replace(/^@/, "");
+    if (!nextUsername) {
+      toast.error("Enter a LessGoo username to connect");
+      return;
+    }
+    setConnectedUser(`@${nextUsername}`);
+    setUsername("");
+    toast.success(`Connected with @${nextUsername}`);
+  };
+
   return (
+<<<<<<< HEAD
     <section id="guardian" className="px-4 py-16">
       <div className="mx-auto max-w-6xl">
         <SectionTitle
@@ -206,6 +234,52 @@ export function GuardianShield() {
         />
         <div className="grid gap-5 md:grid-cols-2">
           <div className={card}>
+=======
+    <section id="guardian" className="bg-[#f0fbfc] px-4 py-16 md:py-20">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="mx-auto mb-10 max-w-4xl text-center">
+          <span className="inline-flex rounded-full bg-peach px-5 py-2 text-sm font-bold text-accent-foreground">Guardian Shield</span>
+          <h2 className="mt-5 text-4xl font-bold leading-tight tracking-tight md:text-6xl">{role === "guardian" ? "Peace of mind for parents" : "Your trip, with a safety net"}</h2>
+          <p className="mx-auto mt-4 max-w-4xl text-lg text-muted-foreground md:text-2xl">{role === "guardian" ? "Automatic check-ins for kids and solo travelers, with a fail-safe if their phone goes quiet." : "Set your check-in plan, share your trip, and get help quickly wherever you go."}</p>
+        </div>
+        <div className="mx-auto mb-8 flex w-fit rounded-full border border-[#d1e9ed] bg-white p-1.5 shadow-sm" role="tablist" aria-label="Choose your Guardian Shield view">
+          <button role="tab" aria-selected={role === "user"} onClick={() => setRole("user")} className={`flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition md:px-8 ${role === "user" ? "bg-primary text-primary-foreground shadow" : "text-muted-foreground hover:text-foreground"}`}><User className="h-4 w-4" />For me</button>
+          <button role="tab" aria-selected={role === "guardian"} onClick={() => setRole("guardian")} className={`flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition md:px-8 ${role === "guardian" ? "bg-primary text-primary-foreground shadow" : "text-muted-foreground hover:text-foreground"}`}><ShieldCheck className="h-4 w-4" />For a guardian</button>
+        </div>
+        {role === "user" ? (
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-[2rem] border border-[#d1e9ed] bg-white p-6 shadow-soft md:p-8">
+              <div className="flex items-center justify-between gap-3"><div><h3 className="flex items-center gap-2 text-xl font-semibold"><Navigation className="text-primary" />My trip check-ins</h3><p className="mt-1 text-sm text-muted-foreground">Chandigarh → Shimla · shared with {connectedUser}</p></div><label className="flex items-center gap-2 text-sm">On <Switch checked={active} onCheckedChange={setActive} /></label></div>
+              <form onSubmit={connectGuardian} className="mt-6 rounded-3xl bg-[#f0f8fb] p-4 md:p-5">
+                <label htmlFor="guardian-username" className="text-sm font-bold">Connect with a LessGoo username</label>
+                <div className="mt-2 flex gap-2"><input id="guardian-username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="e.g. @priya_sharma" className="min-w-0 flex-1 rounded-full border bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring" /><Button type="submit" className="shrink-0 rounded-full px-4"><UserPlus className="mr-1 h-4 w-4" />Connect</Button></div>
+                <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground"><Check className="h-3.5 w-3.5 text-safe" />Currently connected: {connectedUser}</p>
+              </form>
+              <div className="mt-5"><h4 className="font-semibold">Choose what to share with {connectedUser}</h4><p className="mt-1 text-sm text-muted-foreground">You can change these anytime.</p>
+                <div className="mt-3 space-y-3">
+                  <div className="flex items-center justify-between gap-4 rounded-2xl bg-[#f0f8fb] p-4"><div className="flex items-start gap-3"><MapPinned className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><div><p className="font-semibold">Live location</p><p className="text-sm text-muted-foreground">Share an updated location every 2 hours</p></div></div><Switch aria-label="Share live location every 2 hours" checked={shareLocation} onCheckedChange={setShareLocation} /></div>
+                  <div className="flex items-center justify-between gap-4 rounded-2xl bg-[#f0f8fb] p-4"><div className="flex items-start gap-3"><Hotel className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><div><p className="font-semibold">Hotel check-in details</p><p className="text-sm text-muted-foreground">Share hotel name and check-in status</p></div></div><Switch aria-label="Share hotel check-in details" checked={shareHotel} onCheckedChange={setShareHotel} /></div>
+                  <div className="flex items-center justify-between gap-4 rounded-2xl bg-[#f0f8fb] p-4"><div className="flex items-start gap-3"><Car className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><div><p className="font-semibold">Cab ride details</p><p className="text-sm text-muted-foreground">Share driver name, number and plate when booked in LessGoo</p></div></div><Switch aria-label="Share LessGoo cab ride details" checked={shareCab} disabled={!rideBooked} onCheckedChange={setShareCab} /></div>
+                </div>
+                {shareLocation && <p className="mt-3 rounded-2xl bg-mint/60 px-4 py-3 text-sm">Next location update will be shared in 2 hours.</p>}
+                {shareHotel && <p className="mt-2 rounded-2xl bg-mint/60 px-4 py-3 text-sm">Hotel check-in details will be shared when you check in.</p>}
+                {rideBooked ? <p className="mt-2 rounded-2xl bg-mint/60 px-4 py-3 text-sm">LessGoo cab booked · Ramesh K. · +91 98050 00000 · HP 03 1234 {shareCab ? "· shared with " + connectedUser : "· sharing is off"}</p> : <button type="button" onClick={() => { setRideBooked(true); toast.success("Demo LessGoo cab booking added"); }} className="mt-2 text-left text-sm font-semibold text-primary underline underline-offset-4">Preview cab details after a LessGoo booking</button>}
+              </div>
+              <p className="mt-5 text-sm font-semibold">Check in every</p>
+              <div className="mt-2 grid grid-cols-3 gap-2">{[30, 45, 60].map((m) => <button key={m} onClick={() => setIntervalMins(m)} aria-pressed={interval === m} className={`rounded-2xl px-2 py-3 text-sm font-semibold transition ${interval === m ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-secondary"}`}>{m} min</button>)}</div>
+              <div className="mt-5 rounded-2xl bg-mint/60 p-4"><p className="flex items-center gap-2 font-semibold"><Clock3 className="h-4 w-4 text-safe" />Next check-in</p><p className="mt-1 text-sm text-muted-foreground">In {interval} minutes · your location is shared securely</p></div>
+              <ul className="mt-4 space-y-2">{log.slice(0, 3).map((l, i) => <li key={i} className="rounded-2xl bg-muted px-4 py-3 text-sm">{l}</li>)}</ul>
+              <Button variant="outline" className="mt-4 w-full rounded-full" onClick={() => toast.success(`Trip status shared with ${connectedUser}`)}><Share2 className="mr-2 h-4 w-4" />Share trip status</Button>
+            </div>
+            <div className={`flex flex-col justify-between rounded-[2rem] border border-[#d1e9ed] bg-white p-6 shadow-soft md:p-8 ${phoneOff ? "ring-2 ring-sos" : ""}`}>
+              <div><h3 className="text-xl font-semibold">If I miss a check-in</h3><p className="mt-1 text-sm text-muted-foreground">Your guardian is notified and can reach your trusted contacts.</p><div className="mt-5 rounded-2xl bg-sky/70 p-4"><p className="font-semibold">Your trusted contacts</p><p className="mt-1 text-sm text-muted-foreground">Mom · Aunt Priya · Verified cab driver</p></div>{phoneOff && <p className="mt-4 rounded-2xl bg-peach p-4 text-sm">Demo alert: your phone is unreachable. Your guardian can now use the fail-safe contacts.</p>}</div>
+              <div className="mt-6"><label className="mb-4 flex items-center gap-2 text-sm text-muted-foreground"><Switch checked={phoneOff} onCheckedChange={setPhoneOff} />Preview missed check-in alert</label><Button className="h-14 w-full rounded-full bg-sos text-lg font-bold text-white hover:bg-sos/90" onClick={() => toast.error("SOS alert sent to your guardian and emergency contacts") }><AlertTriangle className="mr-2 h-5 w-5" />SOS · Get help now</Button><p className="mt-2 text-center text-xs text-muted-foreground">Use for urgent help. For immediate danger, call 112.</p></div>
+            </div>
+          </div>
+        ) : (
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-[2rem] border border-[#d1e9ed] bg-white p-6 shadow-soft md:p-8">
+>>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
             <div className="flex items-center justify-between">
               <h3 className="flex items-center gap-2 text-xl font-semibold">
                 <ShieldCheck className="text-safe" />
@@ -217,6 +291,7 @@ export function GuardianShield() {
             </div>
             <div className="mt-4 flex gap-2">
               {[30, 45, 60].map((m) => (
+<<<<<<< HEAD
                 <button
                   key={m}
                   onClick={() => setIntervalMins(m)}
@@ -232,13 +307,20 @@ export function GuardianShield() {
                   {l}
                 </li>
               ))}
+=======
+                <button key={m} onClick={() => setIntervalMins(m)} aria-pressed={interval === m} className={`flex-1 rounded-full px-3 py-3 text-sm font-bold transition md:py-4 md:text-base ${interval === m ? "bg-primary text-primary-foreground shadow-sm" : "bg-[#e8f5f8] hover:bg-[#dceff3]"}`}>Every {m} min</button>
+              ))}
+            </div>
+            <ul className="mt-6 space-y-3">
+              {log.map((l, i) => <li key={i} className="rounded-full bg-[#d8f8ee] px-5 py-3 text-sm font-semibold md:px-6 md:py-4 md:text-base">{l}</li>)}
+>>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
             </ul>
             <label className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
               <Switch checked={phoneOff} onCheckedChange={setPhoneOff} />
               Simulate phone unreachable
             </label>
           </div>
-          <div className={`${card} ${phoneOff ? "ring-2 ring-sos" : ""}`}>
+          <div className={`rounded-[2rem] border border-[#d1e9ed] bg-white p-6 shadow-soft md:p-8 ${phoneOff ? "ring-2 ring-sos" : ""}`}>
             <h3 className="text-xl font-semibold">Fail-safe protocol</h3>
             <p className="mt-1 text-sm text-muted-foreground">
               {phoneOff
@@ -247,6 +329,7 @@ export function GuardianShield() {
             </p>
             <ul className="mt-4 space-y-3">
               {failSafe.map((f) => (
+<<<<<<< HEAD
                 <li
                   key={f.label}
                   className={`flex items-center justify-between rounded-2xl p-4 ${phoneOff ? "bg-peach" : "bg-muted opacity-60"}`}
@@ -263,12 +346,19 @@ export function GuardianShield() {
                       <Phone className="mr-1 h-3 w-3" />
                       Call
                     </a>
+=======
+                <li key={f.label} className={`flex items-center justify-between gap-3 rounded-[1.5rem] p-4 md:p-5 ${phoneOff ? "bg-peach" : "bg-[#f0f8fb]"}`}>
+                  <div className="flex min-w-0 items-center gap-3 md:gap-5"><f.icon className="h-6 w-6 shrink-0 text-safe" /><div className="min-w-0"><p className="font-bold md:text-lg">{f.label}</p><p className="truncate text-sm text-muted-foreground md:text-base">{f.who}</p></div></div>
+                  <Button asChild size="sm" disabled={!phoneOff} className="shrink-0 rounded-full bg-safe px-4 text-white hover:bg-safe/90">
+                    <a href={phoneOff ? `tel:${f.phone.replace(/\s/g, "")}` : undefined}><Phone className="mr-1 h-3 w-3" />Call</a>
+>>>>>>> 67facea859c2783345c0443c866303f62e4b4b1e
                   </Button>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+        )}
       </div>
     </section>
   );
